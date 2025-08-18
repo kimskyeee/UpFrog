@@ -1,7 +1,7 @@
 # 올라락! 깨구락!
 올라락! 깨구락!은 언리얼엔진으로 개발된 멀티플레이 플랫포머 게임으로, 게임 내 UI와 장애물을 구현했습니다.
 
-🎥 아래의 사진을 클릭시 전체 게임 플레이 영상을 보실 수 있습니다.
+🎥 아래의 사진을 클릭시 게임 플레이 요약 영상을 보실 수 있습니다.
 
 [![Video Label](http://img.youtube.com/vi/KTFeGCObKgA/0.jpg)](https://youtu.be/KTFeGCObKgA)
 
