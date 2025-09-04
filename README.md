@@ -1,9 +1,13 @@
 # 올라락! 깨구락!
-올라락! 깨구락!은 언리얼엔진으로 개발된 멀티플레이 플랫포머 게임으로, 게임 내 UI와 장애물을 구현했습니다.
+올라락! 깨구락!은 언리얼엔진으로 개발된 멀티플레이 플랫포머 게임입니다. <br>
+저는 게임 내에서
+- 화면전환을 위한 카메라 컴포넌트
+- 게임 내 장애물 설계
+- 방목록UI와 게임 진행도UI 포함한 UI들을 구현했습니다.
 
-🎥 아래의 사진을 클릭시 게임 플레이 요약 영상을 보실 수 있습니다.
+🎥 아래의 사진을 클릭시 게임 플레이 요약 영상과 **제가 직접 구현한 부분** 플레이 영상을 보실 수 있습니다.
 
-[![Video Label](http://img.youtube.com/vi/KTFeGCObKgA/0.jpg)](https://youtu.be/KTFeGCObKgA)
+[![Watch on YouTube](https://img.youtube.com/vi/p32uAg0sVFg/hqdefault.jpg)](https://youtu.be/p32uAg0sVFg)
 
 <br>
 
@@ -109,6 +113,6 @@ https://github.com/user-attachments/assets/520105b5-faf4-477d-a215-d4aabc7c546d
 <br>
 
 ## 트러블 슈팅
-- **음성 퀴즈 시스템의 청크 사이즈 및 패딩 문제** 를 해결했습니다.
+- **음성 퀴즈 시스템의 청크 문제, 컨베이어벨트 장애물의 반복자 무효화 문제** 를 해결했습니다.
 - 프로젝트 관련 트러블 슈팅은 [여기](https://www.notion.so/kimskye/1ceb7f13b7a68181a1e4ddf2c48ec842?source=copy_link#209b7f13b7a68060a840e85122028c76)에서 확인하실 수 있습니다.
 
