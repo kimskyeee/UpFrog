@@ -29,6 +29,8 @@
 <br>
 
 ## 구현 상세 설명
+구현 기능의 소스 코드는 각 소제목 밑의 링크를 통해 확인하실 수 있습니다.
+
 각 기능의 더 자세한 설명은 [여기](https://www.notion.so/kimskye/1ceb7f13b7a68181a1e4ddf2c48ec842)서 확인하실 수 있습니다.
 
 ---
@@ -37,6 +39,8 @@
 게임의 전반적인 UI 및 UX 개발을 담당했습니다.
 
 ### 친구목록 및 방 목록 UI
+> [🔗방 목록 UI 오브젝트 풀링](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/UI/ClientRoomUI.cpp#L225C1-L290C2)
+
 - **친구목록 UI**: Stream API를 활용해 현재 로그인 중인 친구 목록을 표시할 수 있습니다.
 - **방 목록 UI**: 멀티플레이 시 참여할 수 있는 세션 목록을 보여줍니다.
 
@@ -52,6 +56,9 @@
 <br>
 
 ### 화면 전환 카메라 컴포넌트
+> [🔗카메라 컴포넌트](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/UI/UICam/LobbyCameraComp.cpp#L51C1-L66C2)
+> [🔗카메라 컴포넌트 델리게이트 예](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/UI/ClientRoomUI.cpp#L79C2-L92C2)
+
 메인로비, 스테이지, 커스텀 게임 화면 등 화면 시점을 다르게 보여주는 연출에서 **UI간 순환참조를 방지하기 위해** 카메라 컴포넌트를 구현하였습니다.
 
 https://github.com/user-attachments/assets/e2e332b5-0571-42dd-a1c2-c799f0d95590
@@ -59,6 +66,8 @@ https://github.com/user-attachments/assets/e2e332b5-0571-42dd-a1c2-c799f0d95590
 <br>
 
 ### 게임 진행도 UI
+> [🔗게임 진행도 UI](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/UI/GameProgressBarUI.cpp#L61C1-L106C1)
+
 멀티플레이시 게임 시작 지점과 끝 지점의 z좌표 위치를 받아와 **1등 플레이어를 기준**으로 전체 진행률을 계산하는 UI를 구현하였습니다.
 
 https://github.com/user-attachments/assets/ae8eb996-4b8d-41cc-937d-5c7464245817
@@ -68,6 +77,9 @@ https://github.com/user-attachments/assets/ae8eb996-4b8d-41cc-937d-5c7464245817
 ---
 
 ## 2. 게임 장애물 개발
+> [🔗`ABaseProp`](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/Props/BaseProp.cpp)
+> [🔗`AObstacleProp`](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/Props/ObstacleProp/ObstacleProp.cpp)
+
 게임 내 다양한 오브젝트(장애물, 장식물, 건축물 등)의 공통 기반 클래스인 `ABaseProp`을 설계한 뒤, 하위 클래스인 `AObstacleProp`(장애물) 로직을 구현하였습니다.
 
 ### 장애물 목록
@@ -88,18 +100,25 @@ https://github.com/user-attachments/assets/bfd4d5bf-eb1d-4641-8f47-e7aac7c1e5af
 <br>
 
 ### `LaunchCharacter` 동기화
+> [🔗장애물 충돌 발생 `LaunchCharacter`](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/Props/ObstacleProp/ObstacleProp.cpp#L139C1-L151C3)
+> [🔗클라이언트 예측 `LaunchCharacter`](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/Characters/Frog.cpp#L925C1-L943C2)
+
 - 게임 내 존재하는 대포, 트램펄린, 튕김 막대 등 대다수의 장애물이 `LaunchCharacter`로 구현되었습니다.
 - 멀티플레이에서 **장애물 충돌 동기화**를 위해 **클라이언트 예측 구조**를 사용하였습니다.
   - 기존 방식: 서버가 충돌 감지 → `Multicast`로 튕김 반응 적용 (문제: 서버·클라이언트 위치 불일치 시 충돌 누락)
   - 개선 방식: 클라이언트가 먼저 `LaunchCharacter()` 로컬 실행 → 서버에 RPC 요청으로 권한 확정 → 서버가 `Multicast`로 전체 동기화
 
 ### 대포 장애물: 오브젝트 풀링
+> [🔗대포 장애물 풀](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/Props/SpawnProp/ObjectPoolComponent.cpp)
+
 - 대포가 일정 시간마다 대포알을 발사하는 장애물에서, 오브젝트 풀링(Object Pooling)을 적용해 대포알을 재사용했습니다.
 <br>
 
 ---
 
 ## 3. AI 협업 WebSocket기반 음성퀴즈
+> [🔗WebSocket기반 음성퀴즈](https://github.com/kimskyeee/GoUpFrog/blob/main/Source/JumpGame/Props/ObstacleProp/SoundQuizProp/SoundQuizProp.cpp)
+> 
 - AI 팀과의 협업으로, 플레이어의 대답을 기반으로 유사도를 판단해 통과 시 플레이어에게 버프를 부여하는 장애물을 구현했습니다.
 
 https://github.com/user-attachments/assets/520105b5-faf4-477d-a215-d4aabc7c546d
